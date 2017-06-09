@@ -124,8 +124,6 @@ public class SeonRestSampleFraudJava {
 			
 			json.put("user_label", userLabelJson);
 			
-			System.out.println(json.toString());
-			
 			httppost.setEntity(new StringEntity(json.toString()));
 			httppost.setHeader("Content-Type", "application/json");
 			httppost.setHeader("cache-control", "no-cache");
