@@ -2,12 +2,12 @@ import requests
 import json
 
 data={
-    "license_key": "8bbbe856-c498-4a70-b61c-ac0d990794ba",
-    "ip": "213.1.156.1"
+    "license_key": "f5ee07ab-481c-4a72-93f6-051d4decac1e",
+    "ip": "68.65.122.236"
         }
 headers = {"Content-Type": "application/json",
            "cache-control": "no-cache"}
 
-r = requests.post("https://api.seon.io/SeonRestService/proxy-api/v1.0", data=json.dumps(data), headers=headers)
+r = requests.post("https://api.seondev.space/SeonRestService/proxy-api/", data=json.dumps(data), headers=headers)
 
 print(r.text)

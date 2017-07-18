@@ -1,8 +1,8 @@
 <?php
 
-$url = 'https://api.seon.io/SeonRestService/fraud-api/v1.0';
+$url = 'https://api.seondev.space/SeonRestService/fraud-api/v1.0/';
 $data = array(
-	"license_key" => "8bbbe856-c498-4a70-b61c-ac0d990794ba",
+	"license_key" => "f5ee07ab-481c-4a72-93f6-051d4decac1e",
     "ip" => "123.123.123.123",
     "javascript" => "true",
     "action_type" => "",
@@ -83,14 +83,28 @@ $data = array(
     "details_url" => "",
     "user_label" => array("is_intangible_item" => "true","is_pay_on_delivery" =>"true","departure_airport" =>"BUD","days_to_board" =>1,"arrival_airport" =>"MXP")
 );
-$options = array(
-		'http'  => array(
-				'header'   => 'Content-type: application/json',
-				'method'   => 'POST',
-				'content'  => json_encode($data))
-);
-$context  = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
 
-echo $result
+$curl = curl_init($url);
+
+$ch = curl_init();
+curl_setopt_array($ch,array(
+    CURLOPT_URL => $url,
+    CURLOPT_FOLLOWLOCATION => false,
+    CURLOPT_HEADER => false,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPGET => false,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => http_build_query($data)
+));
+
+$result = curl_exec($ch);
+
+$err = curl_error($ch);
+if (curl_errno($ch) && $err) $res = "CURL ERROR [".curl_errno($ch)."]: ".curl_error($ch);
+else $res = $result;
+echo $result;
+echo $res;
+
+
+
 ?>
